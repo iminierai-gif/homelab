@@ -1,0 +1,32 @@
+{
+"name": "devcontainer-dotfiles",
+"build": {
+"dockerfile": "Dockerfile",
+"args": { "USERNAME": "vscode" }
+},
+"remoteUser": "vscode",
+"containerEnv": {
+"DOTFILES_REPO": "git@github.com:iminierai-gif/dotfiles-public.git",
+"DOTFILES_BRANCH": "main"
+},
+"postCreateCommand": "/bin/bash -lc 'bash .devcontainer/scripts/bootstrap.sh'",
+"customizations": {
+"vscode": {
+"settings": {
+"terminal.integrated.defaultProfile.linux": "zsh",
+"editor.formatOnSave": true
+},
+"extensions": [
+"ms-vscode-remote.remote-containers",
+"ms-azuretools.vscode-docker",
+"streetsidesoftware.code-spell-checker",
+"eamodio.gitlens"
+]
+}
+},
+"mounts": [
+"source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+],
+"runArgs": [
+]
+}
